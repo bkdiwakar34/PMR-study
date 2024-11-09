@@ -45,7 +45,7 @@ class ble_read(object):
                 if len(self.offset) == 500:
                     gyro_offset = np.mean(self.offset, axis=0)
                     offset = {'gyro_off':gyro_offset}
-                    with open(r'D:\real_time_rom\software\export.json', 'w') as f:
+                    with open(r'software\export.json', 'w') as f:
                         json.dump(offset, f, separators=(',', ':'), sort_keys=True, indent=4, cls=MyJSONEncoder)
                     self.offset = []
                     self.calibrate = 0
@@ -56,7 +56,7 @@ class ble_read(object):
                     self._var_gyro_offst = np.max(np.var(self.offset[:500],axis = 0))
                     self.reset ==0
             
-            with open(r'D:\real_time_rom\software\export.json', "r") as f:
+            with open(r'software\export.json', "r") as f:
                 off = json.load(f, object_pairs_hook=lambda x: dict((k, np.array(v)) for k, v in x))
             if self._var_gyro_offst < 1.0:
                 final_gyro_off = self.gyro_offset
