@@ -9,6 +9,8 @@ from threading import Thread
 from PyQt5.QtCore import QObject, pyqtSignal
 import numpy as np
 import pyqtgraph as pg
+from PyQt5.QtCore import Qt
+
 
 class SignalCommunicate(QObject):
     request_graph_update = pyqtSignal()
@@ -17,7 +19,9 @@ class SignalCommunicate(QObject):
 class WelcomeScreen(QMainWindow):
     def __init__(self):
         super(WelcomeScreen, self).__init__()
-        loadUi(r"software\ui_file.ui",self)
+        # Load UI and set up scaling
+        loadUi(r"software\ui_file.ui", self)
+        
         self.pushbuttonstart.clicked.connect(self.start_assess)
         self.pushbuttonstop.clicked.connect(self.stop_assess)
         self.pushbuttoncalibrate.clicked.connect(self.calibrate_gyro)
@@ -46,6 +50,7 @@ class WelcomeScreen(QMainWindow):
         self.movement = self.comboBoxmovement.currentText()
         self.comboBoxjoint.activated.connect(self.updatemovement)
     
+
     def updatemovement(self):
         if self.comboBoxjoint.currentText() == 'Neck':
             self.comboBoxmovement.clear()
@@ -217,8 +222,8 @@ app = QApplication(sys.argv)
 welcome = WelcomeScreen()
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(welcome)
-widget.setFixedHeight(625)
-widget.setFixedWidth(1198)
+widget.setFixedHeight(676)
+widget.setFixedWidth(1251)
 widget.show()
 try:
     sys.exit(app.exec_())

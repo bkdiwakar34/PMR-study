@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1261</width>
-    <height>625</height>
+    <width>1251</width>
+    <height>676</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,9 +36,9 @@
     <widget class="QFrame" name="circularprogress">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>-1</x>
        <y>0</y>
-       <width>300</width>
+       <width>301</width>
        <height>300</height>
       </rect>
      </property>
@@ -102,9 +102,9 @@ background-color: rgb(77, 77, 127);
      <widget class="QLabel" name="labeltitle">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>60</x>
         <y>30</y>
-        <width>118</width>
+        <width>151</width>
         <height>25</height>
        </rect>
       </property>
@@ -180,10 +180,10 @@ color: rgb(143, 174, 235);</string>
      <widget class="QLabel" name="labelmovement">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>200</y>
-        <width>171</width>
-        <height>25</height>
+        <x>30</x>
+        <y>180</y>
+        <width>211</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -213,8 +213,8 @@ color: rgb(255, 123, 123);</string>
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>881</width>
-      <height>541</height>
+      <width>911</width>
+      <height>571</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -224,264 +224,9 @@ color: rgb(255, 123, 123);</string>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>570</y>
-      <width>879</width>
-      <height>35</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_6">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>14</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(125, 125, 125);</string>
-         </property>
-         <property name="text">
-          <string>Hospital Number:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineedithospitalnumber">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>14</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 8px;
-color: rgb(185, 80, 80);</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(125, 125, 125);</string>
-       </property>
-       <property name="text">
-        <string>Joint:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBoxjoint">
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QComboBox {
-    /* Background color */
-    background-color: #ffffff;      /* White background */
-    border: 1px solid #b3b3b3;      /* Light gray border */
-    border-radius: 4px;             /* Rounded corners */
-    padding: 5px;                   /* Padding around text */
-}
-
-QComboBox:hover {
-    /* Change border color on hover */
-    border: 1px solid #5a9bd5;      /* Light blue border on hover */
-}
-
-QComboBox:drop-down {
-    /* Customize drop-down button */
-    border: none;                   /* Remove drop-down border */
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 20px;                    /* Button width */
-    background-color: #f0f0f0;      /* Button background */
-    border-left: 1px solid #b3b3b3; /* Divider between button and text */
-}
-
-QComboBox:down-arrow {
-    /* Style the arrow icon */
-    image: url(down-arrow-icon.png); /* Replace with your down-arrow icon path */
-    width: 10px;
-    height: 10px;
-}
-
-QComboBox QAbstractItemView {
-    /* Style for the drop-down list */
-    background-color: #ffffff;
-    border: 1px solid #b3b3b3;
-    selection-background-color: #5a9bd5; /* Highlight color for selected item */
-    selection-color: #ffffff;           /* Text color for selected item */
-}
-</string>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QComboBox::AdjustToContents</enum>
-       </property>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Shoulder</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Neck</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Knee</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Hip</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Ankle</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(125, 125, 125);</string>
-       </property>
-       <property name="text">
-        <string>Movement:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBoxmovement">
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QComboBox {
-    /* Background color */
-    background-color: #ffffff;      /* White background */
-    border: 1px solid #b3b3b3;      /* Light gray border */
-    border-radius: 4px;             /* Rounded corners */
-    padding: 5px;                   /* Padding around text */
-}
-
-QComboBox:hover {
-    /* Change border color on hover */
-    border: 1px solid #5a9bd5;      /* Light blue border on hover */
-}
-
-QComboBox:drop-down {
-    /* Customize drop-down button */
-    border: none;                   /* Remove drop-down border */
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 20px;                    /* Button width */
-    background-color: #f0f0f0;      /* Button background */
-    border-left: 1px solid #b3b3b3; /* Divider between button and text */
-}
-
-QComboBox:down-arrow {
-    /* Style the arrow icon */
-    image: url(down-arrow-icon.png); /* Replace with your down-arrow icon path */
-    width: 10px;
-    height: 10px;
-}
-
-QComboBox QAbstractItemView {
-    /* Style for the drop-down list */
-    background-color: #ffffff;
-    border: 1px solid #b3b3b3;
-    selection-background-color: #5a9bd5; /* Highlight color for selected item */
-    selection-color: #ffffff;           /* Text color for selected item */
-}
-</string>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QComboBox::AdjustToContents</enum>
-       </property>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>ABDUCTION/ADDUCTION</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>FLEXION/EXTENSION</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>EXTERNAL ROTATION</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>INTERNAL ROTATION</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>980</x>
+      <x>932</x>
       <y>350</y>
-      <width>233</width>
+      <width>301</width>
       <height>241</height>
      </rect>
     </property>
@@ -617,6 +362,268 @@ QPushButton:disabled {
         <string>Calibrate</string>
        </property>
       </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>600</y>
+      <width>921</width>
+      <height>37</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(125, 125, 125);</string>
+       </property>
+       <property name="text">
+        <string>Hospital Number:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineedithospitalnumber">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 8px;
+color: rgb(185, 80, 80);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(125, 125, 125);</string>
+         </property>
+         <property name="text">
+          <string>Joint:  </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxjoint">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+    /* Background color */
+    background-color: #ffffff;      /* White background */
+    border: 1px solid #b3b3b3;      /* Light gray border */
+    border-radius: 4px;             /* Rounded corners */
+    padding: 5px;                   /* Padding around text */
+}
+
+QComboBox:hover {
+    /* Change border color on hover */
+    border: 1px solid #5a9bd5;      /* Light blue border on hover */
+}
+
+QComboBox:drop-down {
+    /* Customize drop-down button */
+    border: none;                   /* Remove drop-down border */
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;                    /* Button width */
+    background-color: #f0f0f0;      /* Button background */
+    border-left: 1px solid #b3b3b3; /* Divider between button and text */
+}
+
+QComboBox:down-arrow {
+    /* Style the arrow icon */
+    image: url(down-arrow-icon.png); /* Replace with your down-arrow icon path */
+    width: 10px;
+    height: 10px;
+}
+
+QComboBox QAbstractItemView {
+    /* Style for the drop-down list */
+    background-color: #ffffff;
+    border: 1px solid #b3b3b3;
+    selection-background-color: #5a9bd5; /* Highlight color for selected item */
+    selection-color: #ffffff;           /* Text color for selected item */
+}
+</string>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContents</enum>
+         </property>
+         <item>
+          <property name="text">
+           <string/>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Shoulder</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Neck</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Knee</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hip</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ankle</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(125, 125, 125);</string>
+         </property>
+         <property name="text">
+          <string>Movement:   </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxmovement">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+    /* Background color */
+    background-color: #ffffff;      /* White background */
+    border: 1px solid #b3b3b3;      /* Light gray border */
+    border-radius: 4px;             /* Rounded corners */
+    padding: 5px;                   /* Padding around text */
+}
+
+QComboBox:hover {
+    /* Change border color on hover */
+    border: 1px solid #5a9bd5;      /* Light blue border on hover */
+}
+
+QComboBox:drop-down {
+    /* Customize drop-down button */
+    border: none;                   /* Remove drop-down border */
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;                    /* Button width */
+    background-color: #f0f0f0;      /* Button background */
+    border-left: 1px solid #b3b3b3; /* Divider between button and text */
+}
+
+QComboBox:down-arrow {
+    /* Style the arrow icon */
+    image: url(down-arrow-icon.png); /* Replace with your down-arrow icon path */
+    width: 10px;
+    height: 10px;
+}
+
+QComboBox QAbstractItemView {
+    /* Style for the drop-down list */
+    background-color: #ffffff;
+    border: 1px solid #b3b3b3;
+    selection-background-color: #5a9bd5; /* Highlight color for selected item */
+    selection-color: #ffffff;           /* Text color for selected item */
+}
+</string>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContents</enum>
+         </property>
+         <item>
+          <property name="text">
+           <string/>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ABDUCTION/ADDUCTION</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>FLEXION/EXTENSION</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EXTERNAL ROTATION</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>INTERNAL ROTATION</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
