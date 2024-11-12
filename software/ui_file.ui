@@ -128,9 +128,9 @@ color: rgb(247, 240, 49);</string>
      <widget class="QLabel" name="labelangle">
       <property name="geometry">
        <rect>
-        <x>50</x>
+        <x>19</x>
         <y>100</y>
-        <width>170</width>
+        <width>231</width>
         <height>71</height>
        </rect>
       </property>
@@ -365,7 +365,7 @@ QPushButton:disabled {
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
