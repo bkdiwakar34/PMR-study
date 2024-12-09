@@ -59,8 +59,8 @@ void setup(){
   BLE.setAdvertisedService(imudataService);  // Set the advertised BLE service
   imudataService.addCharacteristic(imudata); // Add characteristic to the service
   BLE.addService(imudataService);            // Add service to BLE
-  BLE.setLocalName("romiumeter");            // Set BLE device name
-  BLE.setDeviceName("romiumeter");
+  BLE.setLocalName("romiumeter_frozen_shoulder");            // Set BLE device name
+  BLE.setDeviceName("romiumeter_frozen_shoulder");
   BLE.setConnectionInterval(0x0006, 0x0006); // Set BLE connection interval for faster updates
   BLE.advertise();                           // Start advertising the BLE service
 }
