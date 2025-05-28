@@ -56,6 +56,9 @@ class ble_read(object):
                         json.dump(offset, f, separators=(',', ':'), sort_keys=True, indent=4, cls=MyJSONEncoder)
                     self.offset = []
                     self.calibrate = 0
+                    if np.max(gyro_offset)>5:
+                        self.offset = []
+                        self.calibrate = 1
             if self.reset == 1:
                 self.offset.append(np.array(self.y[:3])/65.5)
                 if len(self.offset) == 500:

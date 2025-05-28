@@ -57,6 +57,7 @@ class WelcomeScreen(QMainWindow):
         self.pushbuttonstats.clicked.connect(self.show_stats)
         self.plot_now = 1
         self.display = 1
+        self.calibrate_clicked = 0
         self.obj = pg.PlotWidget()
         self.obj.setBackground('#FFFFFF')
         self.obj.setTitle("Range of Motion", color="#6497b1", size="20pt")
@@ -123,6 +124,10 @@ class WelcomeScreen(QMainWindow):
         self.a.q_int = [1,0,0,0]
         self.progressBarValue(0)
         self.labelangle.setText('')
+        self.calibrate_clicked = 1
+        self.pushbuttoncalibrate.setEnabled(False)
+        
+            
     
     def reset_offset(self):
         self.pushbuttonstart.setEnabled(True)
@@ -209,6 +214,9 @@ class WelcomeScreen(QMainWindow):
             self.a.kill_switch(1,path3)
           
     def update_plot_data(self):
+        if self.a.calibrate == 0 and self.calibrate_clicked ==1:
+            self.pushbuttoncalibrate.setEnabled(True)
+            self.calibrate_clicked = 0
         if self.start_disp==1:
             if len(self.a.angle_acc)>100:
                 rom = np.max(self.a.angle_acc)
@@ -280,9 +288,6 @@ class WelcomeScreen(QMainWindow):
         stats_dialog = StatsDialog(df, self)
         stats_dialog.exec_()
     
-   
- 
-
 app = QApplication(sys.argv)
 welcome = WelcomeScreen()
 widget = QtWidgets.QStackedWidget()
