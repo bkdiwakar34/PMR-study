@@ -227,7 +227,7 @@ color: rgb(255, 123, 123);</string>
       <x>932</x>
       <y>350</y>
       <width>301</width>
-      <height>241</height>
+      <height>281</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -360,6 +360,50 @@ QPushButton:disabled {
        </property>
        <property name="text">
         <string>Calibrate</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushbuttonstats">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>18</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #5a9bd5;      /* Base background color */
+    color: #ffffff;                 /* Text color */
+    border: 1px solid #3a7bbf;      /* Darker border */
+    border-radius: 6px;             /* Rounded corners */
+    padding: 8px 15px;              /* Padding for size and spacing */
+    font-weight: bold;              /* Bold text for better readability */
+}
+
+QPushButton:hover {
+    background-color: #76a9e0;      /* Slightly lighter on hover */
+    border: 1px solid #5a9bd5;      /* Change border to match background */
+}
+
+QPushButton:pressed {
+    background-color: #487aa5;      /* Darker shade when pressed */
+    border: 1px solid #3a7bbf;      /* Border same as base for consistency */
+    padding-left: 13px;             /* Indent text slightly on press */
+    padding-top: 7px;
+}
+
+QPushButton:disabled {
+    background-color: #c5c5c5;      /* Gray out when disabled */
+    color: #7d7d7d;                 /* Dimmed text */
+    border: 1px solid #a9a9a9;      /* Light gray border */
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Stats</string>
        </property>
       </widget>
      </item>

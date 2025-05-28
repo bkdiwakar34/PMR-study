@@ -7,6 +7,9 @@ import math
 import json
 import asyncio
 from bleak import BleakClient, BleakScanner
+import pandas as pd
+from datetime import datetime
+import os
 
 class MyJSONEncoder(json.JSONEncoder):         
     def default(self, o):
@@ -33,6 +36,10 @@ class ble_read(object):
         self.reset = 0
         self._var_gyro_offst = 2.0
         self.prev_time = 0
+        self.arr_comp_rom = []
+        self.subject_name = []
+        self.joint = []
+        self.movement = []
     async def run(self,address, char_uuid):
         def notification_handler(sender,data):
             self.y=list(struct.unpack('3h', data[:6]))
@@ -60,16 +67,17 @@ class ble_read(object):
                 off = json.load(f, object_pairs_hook=lambda x: dict((k, np.array(v)) for k, v in x))
             if self._var_gyro_offst < 1.0:
                 final_gyro_off = self.gyro_offset
-                print('yes1')
+                
             else:
                 final_gyro_off = off['gyro_off']
-                print('yes2')
+                
             ang = self.rom(self.y,final_gyro_off,self.time)
             data.extend([ang])
             self.angle_acc = np.append(self.angle_acc, ang)
             if len(self.angle_acc)>4000:
                 self.angle_acc = self.angle_acc[1:]
             if self.sw:
+                self.arr_comp_rom.append(ang)
                 self.writer.writerow(data)
 
         async with BleakClient(address) as client:
@@ -77,12 +85,6 @@ class ble_read(object):
                 print(f"Failed to connect to {address}")
                 return
             
-            print(f"Connected to {address}")
-            
-        
-            # while True:
-            #     data = await client.read_gatt_char(char_uuid)
-            #     notification_handler(data)
             print(f"Connected to {address}")
 
             # Start receiving notifications from the characteristic
@@ -97,8 +99,8 @@ class ble_read(object):
 
 
     async def main(self):
-        print('yes')
-        address = "8C:40:AD:58:04:E7"  # Your device's MAC address
+        
+        address = "A9:42:49:0E:65:80"  # Your device's MAC address
         char_uuid = "660c4a6f-16d8-4e57-8fdb-a4058934242d"  # Characteristic UUID
         
 
@@ -106,7 +108,9 @@ class ble_read(object):
     
     def kill_switch(self, sw,path3):
         if sw:
-            header=['gx','gy','gz','time','ang']
+            header = ['Pateint_ID', 'Date_Time', 'ROM']
+            
+            header=['gx','gy','gz','time','ang']           
             self.f=open(path3, 'w',newline='')
             self.writer = csv.writer(self.f)
             self.writer.writerow(header)
@@ -114,7 +118,14 @@ class ble_read(object):
         if not sw:
             self.sw = 0
             self.f.close()
-
+            # Log summary
+            self.log_global_max_rom(
+                                        subject_id=self.subject_name,
+                                        joint=self.joint,
+                                        movement=self.movement,
+                                        max_rom= np.max(self.arr_comp_rom) # Replace with actual value
+                                    )
+            self.arr_comp_rom = []
     def quaternion_multiply(self, quaternion1, quaternion0):
         w0, x0, y0, z0 = quaternion0
         w1, x1, y1, z1 = quaternion1
@@ -144,7 +155,27 @@ class ble_read(object):
         gyro_ang = np.rad2deg(2*np.arccos(q_int_norm[0]))
         return gyro_ang
    
+    def log_global_max_rom(self, subject_id, joint, movement, max_rom):
+        global_summary_path = os.path.join("data", "global_summary.csv")
         
+        # Prepare row data
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        row = {
+            "Subject_ID": subject_id,
+            "Date_Time": current_time,
+            "Joint": joint,
+            "Movement": movement,
+            "Max_ROM": max_rom
+        }
+
+        # Check if file exists and write accordingly
+        if not os.path.exists(global_summary_path):
+            df = pd.DataFrame([row])
+            df.to_csv(global_summary_path, index=False)
+        else:
+            df = pd.DataFrame([row])
+            df.to_csv(global_summary_path, mode='a', header=False, index=False)
+            
     def thread_run(self):
         asyncio.run(self.main())
                 

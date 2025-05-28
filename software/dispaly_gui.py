@@ -10,11 +10,40 @@ from PyQt5.QtCore import QObject, pyqtSignal
 import numpy as np
 import pyqtgraph as pg
 from PyQt5.QtCore import Qt
+import pandas as pd
+import matplotlib.pyplot as plt
+from PyQt5.QtWidgets import QMessageBox
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt5.QtWidgets import QDialog, QVBoxLayout
 
 
 class SignalCommunicate(QObject):
     request_graph_update = pyqtSignal()
     invoke=pyqtSignal(int)
+
+class StatsDialog(QDialog):
+    def __init__(self, df, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Longitudinal ROM Plots")
+        layout = QVBoxLayout(self)
+
+        fig, axes = plt.subplots(nrows=len(df["Subject_ID"].unique()), figsize=(8, 4 * len(df["Subject_ID"].unique())))
+        if len(df["Subject_ID"].unique()) == 1:
+            axes = [axes]  # Ensure axes is iterable
+
+        for ax, (subject, group) in zip(axes, df.groupby("Subject_ID")):
+            for (joint, movement), sub_group in group.groupby(["Joint", "Movement"]):
+                sub_group = sub_group.sort_values("Date_Time")
+                ax.plot(sub_group["Date_Time"], sub_group["Max_ROM"], marker='o', label=f"{joint}-{movement}")
+            ax.set_title(f"Subject: {subject}")
+            ax.set_xlabel("Date")
+            ax.set_ylabel("Max ROM")
+            ax.legend()
+            ax.grid(True)
+
+        fig.tight_layout()
+        canvas = FigureCanvas(fig)
+        layout.addWidget(canvas)
 
 class WelcomeScreen(QMainWindow):
     def __init__(self):
@@ -25,6 +54,7 @@ class WelcomeScreen(QMainWindow):
         self.pushbuttonstart.clicked.connect(self.start_assess)
         self.pushbuttonstop.clicked.connect(self.stop_assess)
         self.pushbuttoncalibrate.clicked.connect(self.calibrate_gyro)
+        self.pushbuttonstats.clicked.connect(self.show_stats)
         self.plot_now = 1
         self.display = 1
         self.obj = pg.PlotWidget()
@@ -134,11 +164,12 @@ class WelcomeScreen(QMainWindow):
             msg_box.setWindowTitle("Input Required")
             msg_box.setText("Please enter subject details.")
             msg_box.setStandardButtons(QMessageBox.Ok)
-
-            # Wait for the user to click "OK"
             msg_box.buttonClicked.connect(self.enable_button)
             msg_box.exec_()
         if self.lineedithospitalnumber.text()!='' and self.comboBoxjoint.currentText()!='' and self.comboBoxmovement.currentText()!='':
+            self.a.subject_name = self.lineedithospitalnumber.text()
+            self.a.joint = self.comboBoxjoint.currentText()
+            self.a.movement = self.comboBoxmovement.currentText()
             self.start_disp = 1
             self.a.reset = 1
             self.display = 1
@@ -201,6 +232,14 @@ class WelcomeScreen(QMainWindow):
             self.obj.plot([np.argmax(self.freeze)/600,np.argmax(self.freeze)/600],[0,np.max(self.freeze)],pen=pg.mkPen(color='k'))
 
     def stop_assess(self):
+        if self.lineedithospitalnumber.text() == '' or self.comboBoxjoint.currentText() == '' or self.comboBoxmovement.currentText() == '':
+            self.pushbuttonstart.setEnabled(False)
+            msg_box = QMessageBox()
+            msg_box.setWindowTitle("Input Required")
+            msg_box.setText("Please enter subject details.")
+            msg_box.setStandardButtons(QMessageBox.Ok)
+            msg_box.buttonClicked.connect(self.enable_button)
+            msg_box.exec_()
         self.start_disp = 0
         self.a.kill_switch(0,path3)
         rom = np.max(self.a.angle_acc)
@@ -216,7 +255,33 @@ class WelcomeScreen(QMainWindow):
     def connectnow(self):
         while 1:
             time.sleep(0.05)
-            self.signalComm.request_graph_update.emit() 
+            self.signalComm.request_graph_update.emit()
+    
+
+    def show_stats(self):
+        global_summary_path = os.path.join("data", "global_summary.csv")
+        
+        if not os.path.exists(global_summary_path):
+            QMessageBox.information(self, "Stats", "No global summary data found.")
+            return
+
+        df = pd.read_csv(global_summary_path)
+
+        # Clean and normalize data
+        df["Subject_ID"] = df["Subject_ID"].astype(str).str.strip().str.lower()
+        df["Joint"] = df["Joint"].astype(str).str.strip()
+        df["Movement"] = df["Movement"].astype(str).str.strip()
+        df["Date_Time"] = pd.to_datetime(df["Date_Time"])
+
+        if df.empty:
+            QMessageBox.information(self, "Stats", "No valid data to display.")
+            return
+
+        stats_dialog = StatsDialog(df, self)
+        stats_dialog.exec_()
+    
+   
+ 
 
 app = QApplication(sys.argv)
 welcome = WelcomeScreen()
