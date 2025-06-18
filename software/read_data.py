@@ -103,7 +103,10 @@ class ble_read(object):
 
     async def main(self):
         
+        # address = "13:C8:F4:32:5A:CC"  # Your device's MAC address
         address = "A9:42:49:0E:65:80"  # Your device's MAC address
+        # address = "60:2B:A8:76:25:47"  # Your device's MAC address
+        
         char_uuid = "660c4a6f-16d8-4e57-8fdb-a4058934242d"  # Characteristic UUID
         
 

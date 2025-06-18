@@ -41,7 +41,7 @@ BLECharacteristic imudata(deviceServiceimudataCharacteristicUuid, BLEWrite | BLE
 // Function to turn on only the red LED, indicating BLE connection
 void rgbLedRed() {
   digitalWrite(LEDG, HIGH);  // green LED off
-  digitalWrite(LEDB, HIGH);  // blue LED off
+  digitalWrite(LEDB, LOW);  // blue LED off
   digitalWrite(LEDR, LOW);   // red LED on
 }
 
